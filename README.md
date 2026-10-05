@@ -21,15 +21,15 @@ characters hear the player, and it works on its own in any web app.
 ## Install
 
 ```sh
-npm install @gameable/voxy
+npm install @getgameable/voxy
 ```
 
 ## Use
 
 ```ts
-import { VoxyCore } from '@gameable/voxy/core'
-import modelUrl from '@gameable/voxy/models/silero_vad.onnx?url'
-import noiseUrl from '@gameable/voxy/wasm/rnnoise.wasm?url'
+import { VoxyCore } from '@getgameable/voxy/core'
+import modelUrl from '@getgameable/voxy/models/silero_vad.onnx?url'
+import noiseUrl from '@getgameable/voxy/wasm/rnnoise.wasm?url'
 
 const voxy = new VoxyCore({ modelUrl, noiseSuppressionUrl: noiseUrl })
 
@@ -47,13 +47,13 @@ voxy.avatarIdle()
 ```
 
 The `?url` imports are Vite's; with another bundler, serve `silero_vad.onnx`
-and `rnnoise.wasm` from `node_modules/@gameable/voxy/dist/` and pass their URLs.
+and `rnnoise.wasm` from `node_modules/@getgameable/voxy/dist/` and pass their URLs.
 Without `noiseSuppressionUrl` reachable, Voxy runs without RNNoise; without the
 model, it falls back to energy detection and emits a `warn`.
 
-`@gameable/voxy` (the root) also exports DOM widgets — `VoxyWidget`, `Waveform`
+`@getgameable/voxy` (the root) also exports DOM widgets — `VoxyWidget`, `Waveform`
 and `MuteButton` — for a ready-made text box, mute toggle and level meter.
-`@gameable/voxy/core` is the capture alone.
+`@getgameable/voxy/core` is the capture alone.
 
 ### Events
 

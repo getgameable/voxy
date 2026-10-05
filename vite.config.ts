@@ -6,7 +6,7 @@ import babel from '@rolldown/plugin-babel'
 
 /**
  * The library ships the Silero VAD model and the RNNoise binary as
- * `@gameable/voxy/models/*` and `@gameable/voxy/wasm/*`. Only those two
+ * `@getgameable/voxy/models/*` and `@getgameable/voxy/wasm/*`. Only those two
  * directories of `public/` go into the package; the dev UI's test audio stays
  * behind.
  */
@@ -48,7 +48,7 @@ export default defineConfig({
     // public/ is the dev server's; the build copies what the package needs.
     copyPublicDir: false,
     lib: {
-      // `@gameable/voxy` is the core and the widgets; `@gameable/voxy/core` is
+      // `@getgameable/voxy` is the core and the widgets; `@getgameable/voxy/core` is
       // the core alone, with no DOM widgets.
       entry: {
         voxy: path.resolve(__dirname, 'src/index.ts'),

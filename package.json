@@ -1,5 +1,5 @@
 {
-  "name": "@gameable/voxy",
+  "name": "@getgameable/voxy",
   "version": "0.1.0",
   "description": "Voice activity detection and capture for conversational characters in the browser: always-on mic, pre-roll, barge-in, Silero VAD and RNNoise.",
   "keywords": [
