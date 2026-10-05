@@ -1,0 +1,87 @@
+{
+  "name": "@gameable/voxy",
+  "version": "0.1.0",
+  "description": "Voice activity detection and capture for conversational characters in the browser: always-on mic, pre-roll, barge-in, Silero VAD and RNNoise.",
+  "keywords": [
+    "voice-activity-detection",
+    "vad",
+    "silero",
+    "rnnoise",
+    "microphone",
+    "webaudio"
+  ],
+  "homepage": "https://github.com/getgameable/voxy#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getgameable/voxy.git"
+  },
+  "bugs": "https://github.com/getgameable/voxy/issues",
+  "license": "MIT",
+  "type": "module",
+  "files": [
+    "dist",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "main": "./dist/voxy.es.js",
+  "types": "./dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/voxy.es.js"
+    },
+    "./core": {
+      "types": "./dist/types/lib/index.d.ts",
+      "import": "./dist/core.es.js"
+    },
+    "./models/*": "./dist/models/*",
+    "./wasm/*": "./dist/wasm/*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "vite",
+    "lint": "eslint .",
+    "test": "vitest",
+    "typecheck": "tsc -b",
+    "check": "npm run typecheck && vitest run",
+    "build": "tsc -b && vite build && tsc -p tsconfig.lib.json",
+    "build:dev-ui": "vite build --config vite.config.dev-ui.ts",
+    "prepack": "npm run build",
+    "public:promote": "node tools/public/promote.mjs",
+    "public:check": "node tools/public/check.mjs"
+  },
+  "dependencies": {
+    "@echogarden/rnnoise-wasm": "^0.2.0",
+    "onnxruntime-web": "^1.24.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@eslint/js": "^10.0.1",
+    "@rolldown/plugin-babel": "^0.2.2",
+    "@types/babel__core": "^7.20.5",
+    "@types/node": "^25.5.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "^10.1.0",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "jsdom": "^29.0.1",
+    "prettier": "^3.8.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sass": "^1.98.0",
+    "typescript": "~6.0.2",
+    "typescript-eslint": "^8.58.0",
+    "vite": "^8.0.3",
+    "vitest": "^4.1.2"
+  },
+  "overrides": {
+    "eslint-plugin-react-hooks": {
+      "eslint": "^10.0.0"
+    }
+  }
+}
