@@ -4,6 +4,11 @@ name: release
 # that is not on npm yet. Releasing is bumping the version
 # (`npm version <x.y.z> --no-git-tag-version`) and letting it reach main.
 #
+# The token only stages (`npm stage publish`, npm 12): a staged version is not
+# installable until an owner approves it on npmjs.com (or `npm stage approve
+# <id>`) with their second factor. Re-running this before the approval stages
+# the same version again; reject the stale one.
+#
 # Runs only in the public repository: the internal tree carries this file too.
 
 on:
@@ -32,6 +37,9 @@ jobs:
           cache: npm
           registry-url: https://registry.npmjs.org
 
+      - name: npm 12, for `npm stage`
+        run: npm install --global npm@12
+
       - name: Is this version on npm?
         id: version
         run: |
@@ -49,14 +57,14 @@ jobs:
       - if: steps.version.outputs.publish == 'true'
         run: npm run check
 
-      - name: Publish @getgameable/voxy
+      - name: Stage @getgameable/voxy on npm (approve it on npmjs.com)
         if: steps.version.outputs.publish == 'true'
-        run: npm publish --provenance --access public
+        run: npm stage publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Tag and release
         if: steps.version.outputs.publish == 'true'
-        run: gh release create "v${{ steps.version.outputs.version }}" --target "$GITHUB_SHA" --generate-notes
+        run: gh release create "v${{ steps.version.outputs.version }}" --target "$GITHUB_SHA" --generate-notes --notes "Staged on npm: installable once an owner approves it."
         env:
           GH_TOKEN: ${{ github.token }}
